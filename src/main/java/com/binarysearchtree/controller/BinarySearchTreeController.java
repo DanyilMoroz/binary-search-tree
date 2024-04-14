@@ -63,7 +63,7 @@ public class BinarySearchTreeController {
         processedData.setTreeJson(treeJson);
         processedDataRepository.save(processedData);
 
-        model.addAttribute("numbers", "");
+        model.addAttribute("numbersForm", new NumbersForm());
         model.addAttribute("processedData", processedData);
         return "enter-numbers";
     }

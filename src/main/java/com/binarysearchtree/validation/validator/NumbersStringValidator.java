@@ -4,6 +4,9 @@ import com.binarysearchtree.validation.annotation.ValidNumbersString;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class NumbersStringValidator implements ConstraintValidator<ValidNumbersString, String> {
 
     @Override
@@ -16,10 +19,18 @@ public class NumbersStringValidator implements ConstraintValidator<ValidNumbersS
             return false;
         }
 
-        // Split the input string by commas and trim each part
         String[] parts = value.split(",");
+        Set<String> seenNumbers = new HashSet<>();
+
         for (String part : parts) {
-            if (!isValidNumber(part.trim())) {
+            String trimmedPart = part.trim();
+
+            if (!isValidNumber(trimmedPart)) {
+                return false;
+            }
+
+            if (!seenNumbers.add(trimmedPart)) {
+                // Duplicate number found
                 return false;
             }
         }
