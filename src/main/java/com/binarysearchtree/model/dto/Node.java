@@ -7,9 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NodeDTO {
+public class Node {
 
-    private Long id;
-    private NodeDTO left;
-    private NodeDTO right;
+    private double data;
+    private Node left;
+    private Node right;
+
+    public Node(double data) {
+        this.data = data;
+    }
 }
